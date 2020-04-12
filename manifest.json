@@ -1,0 +1,28 @@
+{
+  "name": "Darky",
+  "version": "1.0",
+  "description": "Minimalistic and customizable dark mode.",
+  "permissions": ["activeTab", "tabs", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Darky",
+    "default_icon": {
+      "16": "images/darky16.png",
+      "32": "images/darky32.png",
+      "48": "images/darky48.png",
+      "128": "images/darky128.png"
+    }
+  },
+  "icons": {
+    "16": "images/darky16.png",
+    "32": "images/darky32.png",
+    "48": "images/darky48.png",
+    "128": "images/darky128.png"
+  },
+  "manifest_version": 2
+}
