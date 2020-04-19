@@ -19,10 +19,11 @@ function onToggle() {
   if (checked) {
     chrome.storage.local.get("css", function (style) {
       if (style.css) {
-        chrome.tabs.insertCSS({ code: style.css }, function () {
-          console.log(style);
-        });
+        chrome.tabs.insertCSS({ code: style.css });
       }
+    });
+    chrome.storage.local.get("js", function (script) {
+      chrome.tabs.executeScript({ code: script.js });
     });
   } else {
     chrome.tabs.reload();

@@ -32,6 +32,7 @@ chrome.runtime.onInstalled.addListener(function () {
   chrome.storage.local.set({
     defaultCSS: defaultStyles,
     css: defaultStyles,
+    js: `console.warn('Darky (Chrome Extension): This message was injected from "background.js". You can implement your custom scripts there!')`,
     title: defaultTitle,
   });
 });
