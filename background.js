@@ -26,8 +26,12 @@ a * {
   text-decoration: underline !important;
 }`;
 
+const defaultTitle = "Let's get darky!";
+
 chrome.runtime.onInstalled.addListener(function () {
-  chrome.storage.local.set({ css: defaultStyles }, function () {
-    console.info("Default styles are set!");
+  chrome.storage.local.set({
+    defaultCSS: defaultStyles,
+    css: defaultStyles,
+    title: defaultTitle,
   });
 });

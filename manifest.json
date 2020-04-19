@@ -1,11 +1,11 @@
 {
   "name": "Darky",
-  "version": "1.0",
-  "description": "Minimalistic and customizable dark mode.",
-  "permissions": ["activeTab", "tabs", "storage"],
+  "version": "1.1",
+  "description": "Minimalistic and customizable theme for your active tab.",
+  "permissions": ["activeTab", "storage"],
   "background": {
     "scripts": ["background.js"],
-    "persistent": true
+    "persistent": false
   },
   "options_page": "options.html",
   "browser_action": {

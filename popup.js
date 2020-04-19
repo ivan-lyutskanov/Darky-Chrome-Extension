@@ -6,6 +6,12 @@ const optionsUrl = chrome.extension.getURL("options.html");
 optionsLink.setAttribute("href", optionsUrl);
 let checked = false;
 
+const title = document.querySelector(".title");
+
+chrome.storage.local.get("title", function (titleObj) {
+  title.innerHTML = titleObj.title;
+});
+
 function toggleDarkMode() {
   checked = !checked;
   if (checked) {

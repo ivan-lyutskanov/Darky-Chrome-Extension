@@ -1,12 +1,12 @@
 "use strict";
 const storage = chrome.storage.local;
+const titleInput = document.getElementById("title");
+const setTitleButton = document.querySelector("button.set-title");
 const saveButton = document.querySelector("button.save");
 const clearButton = document.querySelector("button.clear");
 const resetButton = document.querySelector("button.reset");
 const textarea = document.querySelector("textarea");
-const backButton = document.querySelector(".back");
-const popupUrl = chrome.extension.getURL("popup.html");
-backButton.setAttribute("href", popupUrl);
+
 const defaultStyles = `*,
 *::after,
 *::before {
@@ -32,13 +32,33 @@ a * {
   color: #fff !important;
   text-decoration: underline !important;
 }`;
-
+setTitleButton.addEventListener("click", setTitle);
 saveButton.addEventListener("click", saveStyles);
 clearButton.addEventListener("click", clearInput);
 resetButton.addEventListener("click", resetStyles);
-backButton.addEventListener("click", goBack);
 
+loadTitle();
 loadStyles();
+
+function loadTitle() {
+  storage.get("title", function (titleObj) {
+    titleInput.value = titleObj.title;
+  });
+}
+
+function loadStyles() {
+  storage.get("css", function (style) {
+    if (style.css) {
+      textarea.value = style.css;
+    }
+  });
+}
+
+function setTitle() {
+  storage.set({ title: titleInput.value }, function () {
+    notify("Title was updated");
+  });
+}
 
 function saveStyles() {
   const styles = textarea.value;
@@ -51,27 +71,21 @@ function saveStyles() {
   });
 }
 
-function loadStyles() {
-  storage.get("css", function (style) {
-    if (style.css) {
-      textarea.value = style.css;
-    }
-  });
-}
-
 function resetStyles() {
-  storage.set({ css: defaultStyles }, function () {
-    textarea.value = defaultStyles;
+  let defaultCSS;
+
+  storage.get("defaultCSS", function (defaultStyles) {
+    defaultCSS = defaultStyles.defaultCSS;
+  });
+
+  storage.set({ css: defaultCSS }, function () {
+    textarea.value = defaultCSS;
     notify("Styles was reset");
   });
 }
 
 function clearInput() {
   textarea.value = "";
-}
-
-function goBack() {
-  chrome.tabs.reload();
 }
 
 function notify(msg, isErr) {
