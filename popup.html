@@ -13,6 +13,7 @@
       body {
         font-family: "Amatic SC", cursive;
         border: 3px solid black;
+        background-color: #fefefe;
       }
       .container {
         padding: 0.4rem;
@@ -26,51 +27,6 @@
         font-size: 1.5rem;
         margin-bottom: 1rem;
       }
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-      }
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-      input:checked + .slider {
-        background-color: black;
-      }
-      input:checked + .slider:before {
-        transform: translateX(26px);
-      }
-      .slider.round {
-        border-radius: 34px;
-      }
-      .slider.round:before {
-        border-radius: 100%;
-      }
       #options {
         font-size: 1rem;
         letter-spacing: 1px;
@@ -78,15 +34,137 @@
         margin-top: 1rem;
         text-decoration: none;
       }
+      /* switch styles - start */
+      .toggle {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 60px;
+        background-color: #bbb;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        text-align: center;
+      }
+
+      .toggle input {
+        width: 100%;
+        height: 100%;
+        margin: 0 0;
+        padding: 0 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+
+      .toggle label {
+        display: block;
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+        background-image: -webkit-linear-gradient(
+          top,
+          #fff 0%,
+          #ddd 50%,
+          #fff 50%,
+          #eee 100%
+        );
+        background-image: linear-gradient(
+          top,
+          #fff 0%,
+          #ddd 50%,
+          #fff 50%,
+          #eee 100%
+        );
+        -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 -1px 1px #888,
+          inset 0 -5px 1px #bbb, inset 0 -6px 0 white;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 -1px 1px #888,
+          inset 0 -5px 1px #bbb, inset 0 -6px 0 white;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        font: normal 11px Arial, Sans-Serif;
+        color: #666;
+        text-shadow: 0 1px 0 white;
+        cursor: text;
+      }
+
+      .toggle label:before {
+        content: attr(data-off);
+        position: absolute;
+        top: 6px;
+        right: 0;
+        left: 0;
+        z-index: 4;
+      }
+
+      .toggle label:after {
+        content: attr(data-on);
+        position: absolute;
+        right: 0;
+        bottom: 11px;
+        left: 0;
+        color: #666;
+        text-shadow: 0 -1px 0 #eee;
+      }
+
+      .toggle input:checked + label {
+        background-image: -webkit-linear-gradient(
+          top,
+          #eee 0%,
+          #ccc 50%,
+          #fff 50%,
+          #eee 100%
+        );
+        background-image: linear-gradient(
+          top,
+          #eee 0%,
+          #ccc 50%,
+          #fff 50%,
+          #eee 100%
+        );
+        -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.4),
+          inset 0 1px 7px -1px #ccc, inset 0 5px 1px #fafafa,
+          inset 0 6px 0 white;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.4), inset 0 1px 7px -1px #ccc,
+          inset 0 5px 1px #fafafa, inset 0 6px 0 white;
+      }
+
+      .toggle input:checked:hover + label {
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
+          inset 0 1px 7px -1px #ccc, inset 0 5px 1px #fafafa,
+          inset 0 6px 0 white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 1px 7px -1px #ccc,
+          inset 0 5px 1px #fafafa, inset 0 6px 0 white;
+      }
+
+      .toggle input:checked + label:before {
+        z-index: 1;
+        top: 11px;
+      }
+
+      .toggle input:checked + label:after {
+        bottom: 9px;
+        color: #aaa;
+        text-shadow: none;
+        z-index: 4;
+      }
+      /* switch styles - end */
     </style>
   </head>
   <body>
     <div class="container">
       <span class="title">Loading...</span>
-      <label class="switch">
+      <span class="toggle" id="toggleButton">
         <input type="checkbox" />
-        <span class="slider round" id="toggleButton"></span>
-      </label>
+        <label data-off="O" data-on="I"></label>
+      </span>
       <a id="options" target="_blank">customaze</a>
     </div>
     <script src="popup.js"></script>

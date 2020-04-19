@@ -7,31 +7,6 @@ const clearButton = document.querySelector("button.clear");
 const resetButton = document.querySelector("button.reset");
 const textarea = document.querySelector("textarea");
 
-const defaultStyles = `*,
-*::after,
-*::before {
-  background-color: #000 !important;
-  color: #eee !important;
-  border-color: #eee !important;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  color: #ff6363 !important;
-}
-
-pre,
-pre * {
-  background-color: #202040 !important;
-}
-
-a,
-a * {
-  color: #fff !important;
-  text-decoration: underline !important;
-}`;
 setTitleButton.addEventListener("click", setTitle);
 saveButton.addEventListener("click", saveStyles);
 clearButton.addEventListener("click", clearInput);

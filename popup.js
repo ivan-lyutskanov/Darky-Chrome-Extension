@@ -12,7 +12,9 @@ chrome.storage.local.get("title", function (titleObj) {
   title.innerHTML = titleObj.title;
 });
 
-function toggleDarkMode() {
+toggleButton.onclick = onToggle;
+
+function onToggle() {
   checked = !checked;
   if (checked) {
     chrome.storage.local.get("css", function (style) {
@@ -26,5 +28,3 @@ function toggleDarkMode() {
     chrome.tabs.reload();
   }
 }
-
-toggleButton.onclick = toggleDarkMode;
