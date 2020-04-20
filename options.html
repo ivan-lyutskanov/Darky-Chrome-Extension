@@ -75,10 +75,10 @@
       .button:hover {
         background-color: #777;
       }
-      .button.save:hover {
+      .button[class^="save-"]:hover {
         background-color: #00b894;
       }
-      .button.clear:hover {
+      .button[class^="clear-"]:hover {
         background-color: #d63031;
       }
       .message {
@@ -110,14 +110,22 @@
       <button class="button set-title">Update</button>
       <h2>Theme CSS</h2>
       <textarea
+        class="css"
         placeholder="example: body { background-color: #000 !important; }"
       ></textarea>
       <div>
-        <button class="button save">Save</button>
-        <button class="button clear">Clear</button>
-        <button class="button reset">Reset</button>
+        <button class="button save-css">Save</button>
+        <button class="button clear-css">Clear</button>
+        <button class="button reset-css">Reset</button>
       </div>
       <div class="message"></div>
+      <h2>Theme JS</h2>
+      <textarea class="js"></textarea>
+      <div>
+        <button class="button save-js">Save</button>
+        <button class="button clear-js">Clear</button>
+        <button class="button reset-js">Reset</button>
+      </div>
     </section>
     <script src="options.js"></script>
   </body>

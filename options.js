@@ -2,18 +2,26 @@
 const storage = chrome.storage.local;
 const titleInput = document.getElementById("title");
 const setTitleButton = document.querySelector("button.set-title");
-const saveButton = document.querySelector("button.save");
-const clearButton = document.querySelector("button.clear");
-const resetButton = document.querySelector("button.reset");
-const textarea = document.querySelector("textarea");
+const saveButtonCSS = document.querySelector("button.save-css");
+const clearButtonCSS = document.querySelector("button.clear-css");
+const resetButtonCSS = document.querySelector("button.reset-css");
+const textareaCSS = document.querySelector("textarea.css");
+const textareaJS = document.querySelector("textarea.js");
+const saveButtonJS = document.querySelector("button.save-js");
+const clearButtonJS = document.querySelector("button.clear-js");
+const resetButtonJS = document.querySelector("button.reset-js");
 
 setTitleButton.addEventListener("click", setTitle);
-saveButton.addEventListener("click", saveStyles);
-clearButton.addEventListener("click", clearInput);
-resetButton.addEventListener("click", resetStyles);
+saveButtonCSS.addEventListener("click", saveStyles);
+clearButtonCSS.addEventListener("click", clearStyles);
+resetButtonCSS.addEventListener("click", resetStyles);
+saveButtonJS.addEventListener("click", saveJS);
+clearButtonJS.addEventListener("click", clearJS);
+resetButtonJS.addEventListener("click", resetJS);
 
 loadTitle();
 loadStyles();
+loadJS();
 
 function loadTitle() {
   storage.get("title", function (titleObj) {
@@ -24,7 +32,15 @@ function loadTitle() {
 function loadStyles() {
   storage.get("css", function (style) {
     if (style.css) {
-      textarea.value = style.css;
+      textareaCSS.value = style.css;
+    }
+  });
+}
+
+function loadJS() {
+  storage.get("js", function (script) {
+    if (script.js) {
+      textareaJS.value = script.js;
     }
   });
 }
@@ -36,7 +52,7 @@ function setTitle() {
 }
 
 function saveStyles() {
-  const styles = textarea.value;
+  const styles = textareaCSS.value;
   if (!styles) {
     return notify("Error! Please provide some styles.", true);
   }
@@ -54,13 +70,41 @@ function resetStyles() {
   });
 
   storage.set({ css: defaultCSS }, function () {
-    textarea.value = defaultCSS;
+    textareaCSS.value = defaultCSS;
     notify("Styles was reset");
   });
 }
 
-function clearInput() {
-  textarea.value = "";
+function clearStyles() {
+  textareaCSS.value = "";
+}
+
+function saveJS() {
+  const script = textareaJS.value;
+  if (!script) {
+    return notify("Error! Please provide some JS (or click Reset).", true);
+  }
+
+  storage.set({ js: script }, function () {
+    notify("Script was saved");
+  });
+}
+
+function clearJS() {
+  textareaJS.value = "";
+}
+
+function resetJS() {
+  let defaultJS;
+
+  storage.get("defaultJS", function (defaultScript) {
+    defaultJS = defaultScript.defaultJS;
+  });
+
+  storage.set({ js: defaultJS }, function () {
+    textareaJS.value = defaultJS;
+    notify("Script was reset");
+  });
 }
 
 function notify(msg, isErr) {

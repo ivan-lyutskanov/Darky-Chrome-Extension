@@ -26,13 +26,18 @@ a * {
   text-decoration: underline !important;
 }`;
 
+const defaultScript = `console.warn('Darky (Chrome Extension): This message was injected from plugin option page (follow ${chrome.extension.getURL(
+  "options.html"
+)}). You can add your custom script there!')`;
+
 const defaultTitle = "Let's get darky!";
 
 chrome.runtime.onInstalled.addListener(function () {
   chrome.storage.local.set({
     defaultCSS: defaultStyles,
     css: defaultStyles,
-    js: `console.warn('Darky (Chrome Extension): This message was injected from "background.js". You can implement your custom scripts there!')`,
+    defaultJS: defaultScript,
+    js: defaultScript,
     title: defaultTitle,
   });
 });
