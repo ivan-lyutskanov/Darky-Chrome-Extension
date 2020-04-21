@@ -23,7 +23,9 @@ function onToggle() {
       }
     });
     chrome.storage.local.get("js", function (script) {
-      chrome.tabs.executeScript({ code: script.js });
+      if (script.js) {
+        chrome.tabs.executeScript({ code: script.js });
+      }
     });
   } else {
     chrome.tabs.reload();
