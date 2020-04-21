@@ -67,6 +67,7 @@
         cursor: pointer;
         text-decoration: none;
         transition: all 0.3s ease-in;
+        border: none;
       }
 
       .button.set-title {
@@ -75,10 +76,10 @@
       .button:hover {
         background-color: #777;
       }
-      .button[class^="save-"]:hover {
+      .button[class*="save-"]:hover {
         background-color: #00b894;
       }
-      .button[class^="clear-"]:hover {
+      .button[class*="clear-"]:hover {
         background-color: #d63031;
       }
       .message {
