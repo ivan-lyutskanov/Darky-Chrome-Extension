@@ -1,6 +1,6 @@
 {
   "name": "Darky",
-  "version": "1.1",
+  "version": "1.4",
   "description": "Minimalistic and customizable theme for your active tab.",
   "permissions": ["activeTab", "storage"],
   "background": {
