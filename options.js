@@ -63,15 +63,12 @@ function saveStyles() {
 }
 
 function resetStyles() {
-  let defaultCSS;
-
   storage.get("defaultCSS", function (defaultStyles) {
-    defaultCSS = defaultStyles.defaultCSS;
-  });
-
-  storage.set({ css: defaultCSS }, function () {
-    textareaCSS.value = defaultCSS;
-    notify("Styles was reset");
+    const defaultCSS = defaultStyles.defaultCSS;
+    storage.set({ css: defaultCSS }, function () {
+      textareaCSS.value = defaultCSS;
+      notify("Styles was reset");
+    });
   });
 }
 
@@ -95,15 +92,12 @@ function clearJS() {
 }
 
 function resetJS() {
-  let defaultJS;
-
   storage.get("defaultJS", function (defaultScript) {
-    defaultJS = defaultScript.defaultJS;
-  });
-
-  storage.set({ js: defaultJS }, function () {
-    textareaJS.value = defaultJS;
-    notify("Script was reset");
+    const defaultJS = defaultScript.defaultJS;
+    storage.set({ js: defaultJS }, function () {
+      textareaJS.value = defaultJS;
+      notify("Script was reset");
+    });
   });
 }
 
